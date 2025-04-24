@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <div className="w-1/4 h-[100vh] border-2 border-blue-900 bg-black text-white p-5">
-      <div className="text-center  text-3xl font-extralight">Power Zone</div>
+      <div className="text-center  text-3xl font-extralight">Planet Fitness</div>
       <div className="flex  gap-5 my-5">
         <div className="w-[100px] h-[100px] rounded-lg overflow-hidden ">
           <img

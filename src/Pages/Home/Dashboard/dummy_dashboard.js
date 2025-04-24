@@ -12,22 +12,18 @@ const Dashboard = () => {
   const [accordianDashboard, setAccordianDashboard] = useState(false);
   const ref = useRef();
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (accordianDashboard && ref.current && !ref.current.contains(e.target)) {
-        setAccordianDashboard(false);
-      }
-    };
+  useEffect(()=>{
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    // .       
+            // .
+            // Please Watch the youtube video for full code 
+            // .
+            // .
+            // .
+},[accordianDashboard])
 
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [accordianDashboard])
-
-  const handleOnClickMenu = (value) => {
-    sessionStorage.setItem('func', value);
+  const handleOnClickMenu = (value)=>{
+    sessionStorage.setItem('func',value);
   }
 
   return (
@@ -47,21 +43,7 @@ const Dashboard = () => {
       }
 
       <div className='mt-5 pt-3 bg-slate-100 bg-opacity-50 grid gap-5 grid-cols-3 w-full pb-5 overflow-x-auto h-[80%]'>
-
-
-
-      {/* // ths is the card block */}
-        <div className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
-          <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
-
-
-          <div className='py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white '>
-            <PeopleAltIcon sx={{color:"green",fontSize:"50px"}} />
-            <p className='text-xl my-3 font-semibold font-mono'>Joined Members</p>
-          </div>
-        </div>
-
-        {/* this is the card block */}
+        {/* Existing Cards */}
         <Link to={'/specific/monthly'} onClick={() => handleOnClickMenu("monthlyJoined")} className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
           <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
 
@@ -71,16 +53,32 @@ const Dashboard = () => {
           </div>
         </Link>
 
-        <div className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
+        <Link to={'/specific/new-members'} onClick={() => handleOnClickMenu("newMembers")} className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
           <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
 
+          <div className='py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white '>
+            <PeopleAltIcon sx={{ color: "blue", fontSize: "50px" }} />
+            <p className='text-xl my-3 font-semibold font-mono'>New Members</p>
+          </div>
+        </Link>
+
+        <Link to={'/specific/active-members'} onClick={() => handleOnClickMenu("activeMembers")} className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
+          <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
 
           <div className='py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white '>
-            <AccessAlarmIcon sx={{color:"red",fontSize:"50px"}} />
-            <p className='text-xl my-3 font-semibold font-mono'>Expiring Within 3 Days</p>
+            <SignalCellularAltIcon sx={{ color: "green", fontSize: "50px" }} />
+            <p className='text-xl my-3 font-semibold font-mono'>Active Members</p>
           </div>
-        </div>
+        </Link>
 
+        <Link to={'/specific/revenue'} onClick={() => handleOnClickMenu("revenue")} className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
+          <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
+
+          <div className='py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white '>
+            <ReportIcon sx={{ color: "orange", fontSize: "50px" }} />
+            <p className='text-xl my-3 font-semibold font-mono'>Revenue</p>
+          </div>
+        </Link>
 
         <Link to={'/specific/expire-with-in-4-7-days'} onClick={() => handleOnClickMenu("fourToSevenDaysExpire")} className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
           <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
@@ -91,7 +89,6 @@ const Dashboard = () => {
           </div>
         </Link>
 
-        {/* this is the card block */}
         <Link to={'/specific/expired'} onClick={() => handleOnClickMenu("expired")} className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
           <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
 
@@ -101,22 +98,12 @@ const Dashboard = () => {
           </div>
         </Link>
 
-        <div className='w-full h-fit border-2 bg-white rounded-lg cursor-pointer'>
-          <div className='h-3 rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
-
-
-          <div className='py-7 px-5 flex-col justify-center items-center w-full text-center rounded-b-lg hover:bg-slate-900 hover:text-white '>
-            < ReportIcon sx={{color:"brown",fontSize:"50px"}} />
-            <p className='text-xl my-3 font-semibold font-mono'>InActive Members</p>
-          </div>
-        </div>
-
       </div>
 
 
-      <div className='md:bottom-4 p-4 w-3/4 mb-4 md:mb-0 absolute bg-black text-white mt-20 rounded-xl text-xl'>
-        Contact Developer for any Technical Error at +9779862475299
-      </div>
+      {/* <div className='md:bottom-4 p-4 w-3/4 mb-4 md:mb-0 absolute bg-black text-white mt-20 rounded-xl text-xl'>
+        Contact Developer for any Technical Error at 9862475299
+      </div> */}
 
 
     </div>
