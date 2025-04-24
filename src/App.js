@@ -1,16 +1,33 @@
 import './App.css';
+import Sidebar from './Components/Sidebar/sidebar.js';
 import Dashboard from './Pages/Home/Dashboard/dashboard.js';
-
 import Home from './Pages/Home/home';
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const navigate = useNavigate();
+
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    let isLogedIn = sessionStorage.getItem("isLogin");
+    if (isLogedIn) {
+      setIsLogin(true);
+      navigate("/dashboard");
+    }
+  }, [sessionStorage.getItem("isLogin")]);
+
   return (
-    <div className="">
-      <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-      </Routes>
+    <div className="flex ">
+      {/* Sidebar */}
+      {isLogin && <Sidebar />}
+
+      {/* Main Content */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
     </div>
   );
 }
