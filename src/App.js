@@ -1,6 +1,7 @@
 import './App.css';
 import Sidebar from './Components/Sidebar/sidebar.js';
-import Dashboard from './Pages/Home/Dashboard/dashboard.js';
+import Member from './Pages/Member/member.js';
+import Dashboard from './Pages/Dashboard/dashboard.js';
 import Home from './Pages/Home/home';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -14,7 +15,9 @@ function App() {
     let isLogedIn = sessionStorage.getItem("isLogin");
     if (isLogedIn) {
       setIsLogin(true);
-      navigate("/dashboard");
+      // navigate("/dashboard");
+    }else{
+      navigate('/');
     }
   }, [sessionStorage.getItem("isLogin")]);
 
@@ -27,6 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/member" element={<Member />} />
         </Routes>
     </div>
   );
