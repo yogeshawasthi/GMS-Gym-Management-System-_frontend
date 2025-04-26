@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -7,15 +7,34 @@ import SearchIcon from '@mui/icons-material/Search';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MemberCard from '../../Components/MemberCard/memberCard';
+import Modal from '../../Components/Modal/modal';
+import ForgotPassword from '../../Components/Forgotpassword/forgotPassword';
+import AddmemberShip from '../../Components/Addmembership/addmemberShip';
+import Addmembers from '../../Components/Addmembers.js/addmembers';
+
 
 const Member = () => {
+  const [addMemberShip, setAddmemberShip] = useState(false);
+  const [addMember, setAddmember] = useState(false)
+
+  const handleMemberShip = () => {
+    setAddmemberShip(prev => !prev);
+  }
+
+  const handleMembers = () => {
+    setAddmember(prev => !prev);
+  }
+
+
+
+
   return (
     <div className='text-black p-5 w-3/4 h-[100vh]'>
 
       {/* Block for banner */}
       <div className='border-2 bg-slate-900 flex justify-between w-full text-white rounded-lg p-3'>
-        <div className='border-2 pl-3 pr-3 pt-1 pb-1 rounded-2xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>Add Member</div>
-        <div className='border-2 pl-3 pr-3 pt-1 pb-1 rounded-2xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>Membership  <AddIcon/></div>
+        <div className='border-2 pl-3 pr-3 pt-1 pb-1 rounded-2xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500' onClick={() => handleMembers()}>Add Member</div>
+        <div className='border-2 pl-3 pr-3 pt-1 pb-1 rounded-2xl cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500' onClick={() => handleMemberShip()}>Membership  <AddIcon /></div>
       </div>
 
       {/* Block for back to dashboard button */}
@@ -38,20 +57,33 @@ const Member = () => {
       </div>
 
       <div className='bg-slate-100 p-5 mt-5 rounded-lg grid gap-2 grid-cols-3 overflow-x-auto h-[65%]'>
-       
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
 
-      
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
+        <MemberCard />
 
       </div>
+      {addMemberShip && (
+        <Modal
+          header={"Add Membership"}
+          handleClose={handleMemberShip}
+          content={<AddmemberShip />}
+        />
+      )}
+
+      {addMember && (
+        <Modal
+          header={"Add New Member"}
+          handleClose={handleMembers}
+          content={<Addmembers handleClose={handleMembers} />}
+        />
+      )}
     </div>
   );
 };

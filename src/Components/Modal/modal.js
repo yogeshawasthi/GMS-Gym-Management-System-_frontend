@@ -18,3 +18,9 @@ const Modal = ({handleClose,content,header}) => {
 }
 
 export default Modal
+
+
+
+
+
+

@@ -12,11 +12,11 @@ const MemberCard = () => {
             </div>
 
             <div className='mx-auto mt-5 text-center text-xl font-semibold font-mono'>
-                {"Your Name"}
+                {"_*_"}
             </div>
 
             <div className='mx-auto mt-2 text-center text-xl font-mono'>
-                {"+977" + "9800000000"}
+                {"+977" + "9xxxxxxxx"}
             </div>
 
             <div className='mx-auto mt-2 text-center text-xl font-mono'>
@@ -24,12 +24,7 @@ const MemberCard = () => {
             </div>
         </div>
 
-
-     
         
-
-        
-
 
         </>
 
