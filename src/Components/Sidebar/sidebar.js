@@ -2,9 +2,11 @@ import React, { useEffect, useState, userEffect } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import GroupIcon from '@mui/icons-material/Group';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link,useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const [greeting, setGreeting] = useState("");
+  const location = useLocation();//Get Location
 
 
 
@@ -46,17 +48,17 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="  mt-10 py-10  border-t-2 border-gray-700">
-        <div className="flex  items-center gap-8 font-semibold text-xl bg-slate-800  rounded-xl p-3 cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black">
+        <Link  to={'/dashboard'} className={`flex  items-center gap-8 font-semibold text-xl bg-slate-800  rounded-xl p-3 cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black ${location.pathname === "/dashboard" ? 'border-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500' : ''}`}>
           <div><HomeIcon /></div>
           <div>Dashboard</div>
 
-        </div>
+        </Link>
 
-        <div className="flex  items-center mt-5 gap-8 font-semibold text-xl bg-slate-800  rounded-xl p-3 cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black">
+        <Link to={'/member'} className={`flex  items-center mt-5 gap-8 font-semibold text-xl bg-slate-800  rounded-xl p-3 cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black  ${location.pathname === "/member" ? 'border-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500' : ''}`}>
           <div><GroupIcon /></div>
           <div>Members</div>
 
-        </div>
+        </Link>
 
         <div className="flex  items-center mt-5 gap-8 font-semibold text-xl bg-slate-800  rounded-xl p-3 cursor-pointer hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-black">
           <div><LogoutIcon /></div>

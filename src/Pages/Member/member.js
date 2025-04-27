@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,45 @@ const Member = () => {
   const [addMemberShip, setAddmemberShip] = useState(false);
   const [addMember, setAddmember] = useState(false)
 
+  const [currentPage,setCurrentPage] = useState(1);
+  
+  const [startFrom, setSTartFrom] = useState(0);
+  const [endTo, setEndTo] = useState(9);
+  const [totalData, setTotalData] = useState(0);
+  const [limit, setLimit] = useState(9);
+
+
+
+  const [noOfPage, setNoOfPage] = useState(0);
+
+  useEffect(()=>{
+      fetchData();
+
+
+  },[])
+
+  const fetchData=()=>{
+
+      let totalData = 54 ;
+      setTotalData(totalData);
+
+
+      let extraPage = totalData%limit===0?0:1 ;
+      let totalPage = parseInt(totalData/limit) + extraPage;
+      setNoOfPage(totalPage); 
+      
+      if(totalData==0){
+        setSTartFrom(-1);
+        setEndTo(0)
+
+      }else if(totalData<10){
+        setSTartFrom(0);
+        setEndTo(totalData);
+      }
+
+  }
+
+
   const handleMemberShip = () => {
     setAddmemberShip(prev => !prev);
   }
@@ -26,6 +65,33 @@ const Member = () => {
   }
 
 
+  const handlePrev = ()=>{
+    if(currentPage!=1){
+      let currPage = currentPage-1;
+      setCurrentPage(currPage);
+      var from = (currPage-1)*9;
+      var to = (currPage*9);
+      setSTartFrom(from)
+      setEndTo(to);
+    }
+  }
+
+
+  const handleNext=()=>{
+    if(currentPage!==noOfPage){
+      let currPage = currentPage+1;
+      setCurrentPage(currPage);
+      var from = (currPage-1)*9;
+      var to = (currPage*9);
+      if(to>totalData){
+        to = totalData;
+      }
+      setSTartFrom(from)
+      setEndTo(to);
+
+    }
+
+  }
 
 
   return (
@@ -50,9 +116,9 @@ const Member = () => {
       <div className='mt-5 text-xl flex justify-between text-slate-900'>
         <div>Total Members</div>
         <div className='flex gap-5'>
-          <div>1-9 of 52 Members</div>
-          <div className='w-8 h-8 cursor-pointer border-2 flex items-center justify-center hover:text-white hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'><ChevronLeftIcon /></div>
-          <div className='w-8 h-8 cursor-pointer border-2 flex items-center justify-center hover:text-white hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'><ChevronRightIcon /></div>
+          <div>{startFrom+1} -{endTo} of {totalData} Members</div>
+          <div className={`w-8 h-8 cursor-pointer border-2 flex items-center justify-center hover:text-white hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ${currentPage === 1 ? 'bg-gray-200 text-gray-400' : ''}`} onClick={() => { handlePrev(); }}><ChevronLeftIcon /></div>
+          <div className={`w-8 h-8 cursor-pointer border-2 flex items-center justify-center hover:text-white hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ${currentPage === noOfPage ? 'bg-gray-200 text-gray-400' : ''}`} onClick={() => { handleNext(); }}><ChevronRightIcon /></div>
         </div>
       </div>
 
